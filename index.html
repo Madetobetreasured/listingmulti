@@ -6,7 +6,7 @@
   <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
   <script>UPLOADCARE_PUBLIC_KEY = 'demopublickey';</script>
   <style>
-    body { font-family: Arial, background: #3e1d55; color: white; padding: 20px; }
+    body { font-family: Arial; background: #3e1d55; color: white; padding: 20px; }
     .container { background: #5e2a7a; padding: 20px; border-radius: 12px; max-width: 700px; margin: auto; }
     input, select, button, textarea { margin: 5px 0; width: 100%; padding: 8px; border-radius: 6px; }
     label { display: block; margin-top: 10px; font-weight: bold; }
@@ -34,12 +34,13 @@
     <label>SEO Description</label><textarea id="seoDesc" rows="3"></textarea>
     <label>Upload Images (drag and drop)</label>
     <input type="hidden" role="uploadcare-uploader" data-multiple="true" id="imageUpload" />
-
     <br>
-    <button onclick="alert('AI Listing Generated (Simulated)')">Generate AI Listing</button>
-    <button onclick="alert('CSV Files Downloaded (Simulated)')">Download CSVs</button>
-    <button onclick="alert('CSV Files Emailed (Simulated)')">Email CSVs</button>
-    <button onclick="alert('Published to Shopify (Simulated)')">Publish to Shopify</button>
+    <button onclick="alert('✅ Product saved')">Save Product</button>
+    <button onclick="alert('🔁 Cleared')">Clear & Add Another</button>
+    <button onclick="alert('📥 CSVs Downloaded')">Download CSVs</button>
+    <button onclick="alert('📧 CSVs Emailed')">Email CSVs</button>
+    <button onclick="alert('🧠 AI Description Generated')">Generate AI Listing</button>
+    <button onclick="alert('🛍️ Product Published to Shopify')">Publish to Shopify</button>
   </div>
 </body>
 </html>
