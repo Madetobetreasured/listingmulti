@@ -2,17 +2,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>MTBT Listing Tool (GitHub Pages)</title>
+  <title>MTBT Listing Tool</title>
+  <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
+  <script>UPLOADCARE_PUBLIC_KEY = 'demopublickey';</script>
   <style>
     body { font-family: Arial, background: #3e1d55; color: white; padding: 20px; }
-    .container { background: #5e2a7a; padding: 20px; border-radius: 12px; max-width: 600px; margin: auto; }
-    input, select, button { margin: 5px 0; width: 100%; padding: 8px; border-radius: 4px; }
-    label { display: block; margin-top: 10px; }
+    .container { background: #5e2a7a; padding: 20px; border-radius: 12px; max-width: 700px; margin: auto; }
+    input, select, button, textarea { margin: 5px 0; width: 100%; padding: 8px; border-radius: 6px; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>Made to be Treasured - Listing Tool</h2>
+    <h2>Made to be Treasured – Listing Tool</h2>
     <label>SKU</label><input type="text" id="sku">
     <label>Barcode</label><input type="text" id="barcode">
     <label>Supplier</label>
@@ -27,11 +29,17 @@
     <label>Max Price</label><input type="text" id="maxPrice">
     <label>Quantity</label><input type="text" id="quantity" value="6">
     <label>Condition</label><input type="text" id="condition" value="New">
-    <label>Upload Front Image</label><input type="file" id="frontImage">
-    <label>Upload Inside Image</label><input type="file" id="insideImage">
-    <br><br>
-    <button onclick="alert('AI listing generated (simulated)')">Generate Listing</button>
-    <button onclick="alert('CSV Download Triggered (simulated)')">Download CSVs</button>
+    <label>Tags (Shopify)</label><input type="text" id="tags">
+    <label>Collections (Shopify)</label><input type="text" id="collections">
+    <label>SEO Description</label><textarea id="seoDesc" rows="3"></textarea>
+    <label>Upload Images (drag and drop)</label>
+    <input type="hidden" role="uploadcare-uploader" data-multiple="true" id="imageUpload" />
+
+    <br>
+    <button onclick="alert('AI Listing Generated (Simulated)')">Generate AI Listing</button>
+    <button onclick="alert('CSV Files Downloaded (Simulated)')">Download CSVs</button>
+    <button onclick="alert('CSV Files Emailed (Simulated)')">Email CSVs</button>
+    <button onclick="alert('Published to Shopify (Simulated)')">Publish to Shopify</button>
   </div>
 </body>
 </html>
