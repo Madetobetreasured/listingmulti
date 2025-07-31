@@ -1,46 +1,38 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MTBT Listing Tool</title>
+  <link rel="stylesheet" href="style.css" />
   <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
-  <script>UPLOADCARE_PUBLIC_KEY = 'demopublickey';</script>
-  <style>
-    body { font-family: Arial; background: #3e1d55; color: white; padding: 20px; }
-    .container { background: #5e2a7a; padding: 20px; border-radius: 12px; max-width: 700px; margin: auto; }
-    input, select, button, textarea { margin: 5px 0; width: 100%; padding: 8px; border-radius: 6px; }
-    label { display: block; margin-top: 10px; font-weight: bold; }
-  </style>
 </head>
 <body>
   <div class="container">
-    <h2>Made to be Treasured – Listing Tool</h2>
-    <label>SKU</label><input type="text" id="sku">
-    <label>Barcode</label><input type="text" id="barcode">
-    <label>Supplier</label>
-    <select id="supplier">
-      <option value="">-- Choose --</option>
-      <option>ICG</option><option>Abacus</option><option>UKG</option><option>Kingfisher</option>
-      <option>Jonny Javelin</option><option>Words & Wishes</option><option>Nigel Quinney</option>
-      <option>Paperlink</option><option>Danilo</option><option>Sensations</option>
-    </select>
-    <label>Price</label><input type="text" id="price">
-    <label>Min Price</label><input type="text" id="minPrice">
-    <label>Max Price</label><input type="text" id="maxPrice">
-    <label>Quantity</label><input type="text" id="quantity" value="6">
-    <label>Condition</label><input type="text" id="condition" value="New">
-    <label>Tags (Shopify)</label><input type="text" id="tags">
-    <label>Collections (Shopify)</label><input type="text" id="collections">
-    <label>SEO Description</label><textarea id="seoDesc" rows="3"></textarea>
-    <label>Upload Images (drag and drop)</label>
-    <input type="hidden" role="uploadcare-uploader" data-multiple="true" id="imageUpload" />
-    <br>
-    <button onclick="alert('✅ Product saved')">Save Product</button>
-    <button onclick="alert('🔁 Cleared')">Clear & Add Another</button>
-    <button onclick="alert('📥 CSVs Downloaded')">Download CSVs</button>
-    <button onclick="alert('📧 CSVs Emailed')">Email CSVs</button>
-    <button onclick="alert('🧠 AI Description Generated')">Generate AI Listing</button>
-    <button onclick="alert('🛍️ Product Published to Shopify')">Publish to Shopify</button>
+    <h1>MTBT Listing Tool</h1>
+    <form id="productForm">
+      <label>SKU: <input type="text" name="sku" required /></label><br/>
+      <label>Barcode: <input type="text" name="barcode" /></label><br/>
+      <label>Price: <input type="number" name="price" /></label><br/>
+      <label>Supplier: 
+        <select name="supplier">
+          <option>ICG</option><option>Abacus</option><option>UKG</option>
+          <option>Kingfisher</option><option>Jonny Javelin</option><option>Words & Wishes</option>
+          <option>Nigel Quinney</option><option>Paperlink</option><option>Danilo</option><option>Sensations</option>
+        </select>
+      </label><br/>
+      <label>Upload Images: <input type="hidden" role="uploadcare-uploader" data-multiple /></label><br/>
+      <button type="button" onclick="generateAI()">Generate AI</button>
+      <button type="button" onclick="saveProduct()">Save Product</button>
+      <button type="button" onclick="clearForm()">Clear & Add Another</button>
+    </form>
+    <br/>
+    <button onclick="downloadCSV('amazon')">Download for Amazon</button>
+    <button onclick="downloadCSV('shopify')">Download for Shopify</button>
+    <button onclick="downloadCSV('informed')">Download for Informed</button>
+    <button onclick="downloadCSV('veeqo')">Download for Veeqo</button>
   </div>
+  <script src="main.js"></script>
 </body>
 </html>
