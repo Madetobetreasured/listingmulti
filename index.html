@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,6 +17,8 @@
       <label>SKU: <input type="text" name="sku" required /></label><br/>
       <label>Barcode: <input type="text" name="barcode" /></label><br/>
       <label>Price: <input type="number" name="price" /></label><br/>
+      <label>Min Price: <input type="number" name="minPrice" /></label><br/>
+      <label>Max Price: <input type="number" name="maxPrice" /></label><br/>
       <label>Supplier: 
         <select name="supplier">
           <option>ICG</option><option>Abacus</option><option>UKG</option>
@@ -25,7 +26,9 @@
           <option>Nigel Quinney</option><option>Paperlink</option><option>Danilo</option><option>Sensations</option>
         </select>
       </label><br/>
-      <label>Upload Images: <input type="hidden" role="uploadcare-uploader" data-multiple /></label><br/>
+      <label>Upload Images: 
+        <input type="hidden" role="uploadcare-uploader" data-multiple="true" name="images" />
+      </label><br/>
       <button type="button" onclick="generateAI()">Generate AI</button>
       <button type="button" onclick="saveProduct()">Save Product</button>
       <button type="button" onclick="clearForm()">Clear & Add Another</button>

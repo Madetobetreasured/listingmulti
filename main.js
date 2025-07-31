@@ -3,10 +3,13 @@ let products = [];
 
 function saveProduct() {
   const form = document.forms['productForm'];
+  const images = uploadcare.getAll().map(widget => widget.value()).filter(url => url);
   const product = {
     sku: form.sku.value,
     barcode: form.barcode.value,
     price: form.price.value,
+    minPrice: form.minPrice.value,
+    maxPrice: form.maxPrice.value,
     supplier: form.supplier.value,
     condition: 'New',
     quantity: 6,
@@ -14,7 +17,7 @@ function saveProduct() {
     title: 'AI Generated Title',
     description: 'AI Generated Description',
     tags: 'greeting card, occasion',
-    images: []
+    images: images
   };
   products.push(product);
   alert("Product saved.");
@@ -22,6 +25,9 @@ function saveProduct() {
 
 function clearForm() {
   document.getElementById('productForm').reset();
+  document.querySelectorAll('[role=uploadcare-uploader]').forEach(input => {
+    uploadcare.Widget(input).value(null);
+  });
 }
 
 function downloadCSV(platform) {
@@ -30,11 +36,19 @@ function downloadCSV(platform) {
     csv = 'SKU,Price,Quantity,Condition,Barcode\n' + products.map(p => 
       `${p.sku},${p.price},${p.quantity},${p.condition},${p.barcode}`).join('\n');
   } else if (platform === 'shopify') {
-    csv = 'Handle,Title,Body (HTML),Tags,Published,Variant SKU,Variant Price,Image Src\n' + products.map(p =>
-      `${p.sku},${p.title},${p.description},${p.tags},TRUE,${p.sku},${p.price},${p.images[0] || ''}`).join('\n');
+    csv = 'Handle,Title,Body (HTML),Tags,Published,Variant SKU,Variant Price,Image Src\n';
+    products.forEach(p => {
+      if (p.images.length > 0) {
+        p.images.forEach(img => {
+          csv += `${p.sku},${p.title},${p.description},${p.tags},TRUE,${p.sku},${p.price},${img}\n`;
+        });
+      } else {
+        csv += `${p.sku},${p.title},${p.description},${p.tags},TRUE,${p.sku},${p.price},\n`;
+      }
+    });
   } else if (platform === 'informed') {
     csv = 'SKU,Min Price,Max Price\n' + products.map(p =>
-      `${p.sku},${p.price * 0.9},${p.price * 1.1}`).join('\n');
+      `${p.sku},${p.minPrice},${p.maxPrice}`).join('\n');
   } else if (platform === 'veeqo') {
     csv = 'SKU,Barcode,Supplier,Quantity\n' + products.map(p =>
       `${p.sku},${p.barcode},${p.supplier},${p.quantity}`).join('\n');
@@ -48,5 +62,5 @@ function downloadCSV(platform) {
 }
 
 function generateAI() {
-  alert("AI Generation would go here. GPT-4 API key needed.");
+  alert("AI generation triggered. (This requires GPT-4 API key integration via fetch call)");
 }
