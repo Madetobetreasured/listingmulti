@@ -1,8 +1,29 @@
 
 let products = [];
 
-function generateAI() {
-  alert("AI Generation would go here. GPT-4 API key needed.");
+async function generateAI() {
+  const form = document.forms['productForm'];
+  const prompt = `Generate an SEO-optimized product listing for a greeting card with SKU: ${form.sku.value} and supplier: ${form.supplier.value}. Include a title, up to 10 comma-separated tags, and a detailed product description.`;
+
+  const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer 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"
+    },
+    body: JSON.stringify({
+      model: "gpt-4",
+      messages: [{ role: "user", content: prompt }],
+      temperature: 0.7
+    })
+  });
+
+  const data = await response.json();
+  const content = data.choices?.[0]?.message?.content || "";
+  const [titleLine, tagsLine, ...descLines] = content.split('\n').filter(Boolean);
+  form.title.value = titleLine.replace(/^Title:\s*/, '');
+  form.tags.value = tagsLine.replace(/^Tags:\s*/, '');
+  form.description.value = descLines.join('\n');
 }
 
 function saveProduct() {
